@@ -1,11 +1,13 @@
 #!/usr/bin/python
 
+# This Python script has been fixed as it did not work for Python3. Now it works fine. 
+
 import random, sys, string
 
 #We need 3 params
 #Script-name, input-file, output-file
-if len(sys.argv) <> 3:
-	print "Usage: python obfuscator.py inFile.vbs outFile.vbs"
+if len(sys.argv) != 3:
+	print ("Usage: python obfuscator.py inFile.vbs outFile.vbs")
 	sys.exit()
 	
 #Splitter is set to be the "*" symbol,
@@ -52,18 +54,18 @@ def expr(char):
 	exp = random.randrange(0, 3)
 
 	if exp == 0:
-		print "Char " + str(char) + " -> " + str((range+char)) + "-" + str(range)
+		print ("Char " + str(char) + " -> " + str((range+char)) + "-" + str(range))
 		return str((range+char)) + "-" + str(range)
 	if exp == 1:
-		print "Char " + str(char) + " -> " + str((char-range)) + "+" + str(range)
+		print ("Char " + str(char) + " -> " + str((char-range)) + "+" + str(range))
 		return str((char-range)) + "+" + str(range)
 	if exp == 2:
-		print "Char " + str(char) + " -> " + str((char*range)) + "/" + str(range)
+		print ("Char " + str(char) + " -> " + str((char*range)) + "/" + str(range))
 		return str((char*range)) + "/" + str(range)
 
 #Open the source and destination files
-clear_text_file = open(sys.argv[1], "r")
-obfuscated_file = open(sys.argv[2], "w")
+clear_text_file = open(sys.argv[1], "r", enconding="utf8") # The 'encoding="utf8"' is needed because python use 'cp1252' by default so it wouldn't work without that.
+obfuscated_file = open(sys.argv[2], "w", enconding="utf8") # The 'encoding="utf8"' is needed because python use 'cp1252' by default so it wouldn't work without that.
 
 #Write to destination file
 obfuscated_file.write(randCapitalization("Dim " + pld + ", " + array + ", " + temp) + "\n")
@@ -84,4 +86,4 @@ obfuscated_file.write(randCapitalization(subOne) + "\n")
 clear_text_file.close()
 obfuscated_file.close()
 
-print "Done!"
+print ("Done!")
